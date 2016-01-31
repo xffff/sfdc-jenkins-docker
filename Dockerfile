@@ -11,8 +11,12 @@ ARG sfdc_ant_version=35.0
 ARG sfdc_instance=cs18
 ARG git_username=xffff
 ARG jenkins_config_repo_name=sfdc-jenkins-config
+ARG filesToIncludeInBuild_repo_name=filesToIncludeInBuild
 ARG jenkins_config_plugins_filename=plugins.txt
 ARG jenkins_config_git_uri=http://github.com/${git_username}/${jenkins_config_repo_name}.git
+
+ARG filesToIncludeInBuild_uri=http://github.com/${git_username}/${filesToIncludeInBuild_repo_name}.git
+
 
 USER root
 
@@ -36,9 +40,10 @@ RUN wget https://${sfdc_instance}.salesforce.com/dwnld/SfdcAnt/salesforce_ant_${
     && unzip salesforce_ant_${sfdc_ant_version}.zip -d ./salesforce_ant_${sfdc_ant_version} \
     && cp ./salesforce_ant_${sfdc_ant_version}/ant-salesforce.jar /usr/share/ant/lib/ant-salesforce.jar
 
-# clone the repo with the config
+# clone the repo with the config and get the filesToIncludeInBuild script
 WORKDIR /home/jenkins
-RUN git clone ${jenkins_config_git_uri}
+RUN git clone ${jenkins_config_git_uri} \
+    git clone ${filesToIncludeInBuild_uri}
 
 # install all packages required & import jobs
 RUN cp ${jenkins_config_repo_name}/${jenkins_config_plugins_filename} /usr/share/jenkins/plugins.txt
