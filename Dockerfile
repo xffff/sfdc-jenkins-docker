@@ -31,10 +31,7 @@ RUN apt-get install -y apt-utils  \
 		       unzip  \
 		       ant \
                        python3 \
-                       python3-pip
-
-# need lxml to parse the config file with python
-RUN pip3 install lxml
+                       python3-lxml
 
 # make a home directory
 RUN mkdir -p /home/jenkins
