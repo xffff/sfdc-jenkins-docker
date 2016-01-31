@@ -43,7 +43,7 @@ RUN wget https://${sfdc_instance}.salesforce.com/dwnld/SfdcAnt/salesforce_ant_${
 # clone the repo with the config and get the filesToIncludeInBuild script
 WORKDIR /home/jenkins
 RUN git clone ${jenkins_config_git_uri} \
-    git clone ${filesToIncludeInBuild_uri}
+    && git clone ${filesToIncludeInBuild_uri}
 
 # install all packages required & import jobs
 RUN cp ${jenkins_config_repo_name}/${jenkins_config_plugins_filename} /usr/share/jenkins/plugins.txt
