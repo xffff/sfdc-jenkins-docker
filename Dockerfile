@@ -25,7 +25,8 @@ RUN apt-get install -y apt-utils  \
     	    	       git  \
 		       wget  \
 		       unzip  \
-		       ant 
+		       ant \
+                       python3
 
 RUN mkdir -p /home/jenkins
 
