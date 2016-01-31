@@ -30,8 +30,13 @@ RUN apt-get install -y apt-utils  \
 		       wget  \
 		       unzip  \
 		       ant \
-                       python3
+                       python3 \
+                       python3-pip
 
+# need lxml to parse the config file with python
+RUN pip3 install lxml
+
+# make a home directory
 RUN mkdir -p /home/jenkins
 
 # get the force.com migration tool and push to right directory
